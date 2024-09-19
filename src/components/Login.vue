@@ -29,7 +29,7 @@
 
 <style scoped>
 .login-content {
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
 }
 
 .title-login {
@@ -38,7 +38,7 @@
 }
 
 .content-inputs {
-    margin-bottom: 2rem;
+    margin-bottom: 1.6rem;
 }
 
 .content-inputs label {
