@@ -1,6 +1,22 @@
 <script setup>
+import { ref } from "vue";
 import Login from "../components/Login.vue"
+import Register from "@/components/Register.vue";
+import { addUser } from "@/services/axios";
 
+const registerView = ref(false)
+
+const showRegister = () => {
+  registerView.value = true;
+}
+
+const showLogin = () => {
+  registerView.value = false;
+}
+
+const saveUser = (user) => {
+  addUser(user)
+}
 
 </script>
 
@@ -9,10 +25,13 @@ import Login from "../components/Login.vue"
     <div class="container">
 
       <div class="card">
-        <Login />
+        <Register @save-user="saveUser" v-if="registerView" />
+        <Login v-else />
 
-        <button class="acount">¿No tienes una cuenta? Crea una</button>
-        <!-- <button>¿Ya tienes una cuenta? Inicia sesión</button> -->
+        <button v-if="!registerView" @click="showRegister" class="acount">¿No tienes una cuenta? Crea una</button>
+
+        <button v-if="registerView" @click="showLogin" class="acount">¿Ya tienes una cuenta? Inicia sesión</button>
+
       </div>
     </div>
   </main>
