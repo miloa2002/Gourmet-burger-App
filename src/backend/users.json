@@ -1,11 +1,3 @@
 {
-  "users": [
-    {
-      "id": 1727831642184,
-      "name": "Camilo",
-      "mail": "agudelo.tapias@gmail.com",
-      "phone": 30512365313,
-      "password": "123"
-    }
-  ]
+  "users": []
 }
