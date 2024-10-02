@@ -1,48 +1,11 @@
 {
   "users": [
     {
-      "id": "81a9",
-      "user": {
-        "id": 1727140430826,
-        "name": "dfgh",
-        "mail": "cagudelo@mtagraphics.com",
-        "phone": 564,
-        "password": "456",
-        "passwordRepeat": "456"
-      }
-    },
-    {
-      "id": "8cd9",
-      "user": {
-        "id": 1727140635641,
-        "name": "hgjjghj",
-        "mail": "agudelo.tapias@gmail.com",
-        "phone": 456,
-        "password": "456",
-        "passwordRepeat": "546"
-      }
-    },
-    {
-      "id": "0487",
-      "user": {
-        "id": 1727140667244,
-        "name": "fghj",
-        "mail": "teste@exemplo.us",
-        "phone": 456,
-        "password": "456",
-        "passwordRepeat": "456"
-      }
-    },
-    {
-      "id": "982c",
-      "user": {
-        "id": 1727140681594,
-        "name": "ghjk",
-        "mail": "cagudelo@mtagraphics.com",
-        "phone": 456,
-        "password": "456",
-        "passwordRepeat": "456"
-      }
+      "id": 1727831642184,
+      "name": "Camilo",
+      "mail": "agudelo.tapias@gmail.com",
+      "phone": 30512365313,
+      "password": "123"
     }
   ]
 }

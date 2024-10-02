@@ -1,7 +1,10 @@
 import { api } from '@/api/api'
 
-const addUser = (user) => {
-  api.post(`/users`, { user }).then((res) => console.log(res.data))
+export default {
+  addUser(user) {
+    return api.post('/users', user)
+  },
+  getUsers() {
+    return api.get('/users')
+  }
 }
-
-export { addUser }

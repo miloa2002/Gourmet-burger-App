@@ -1,25 +1,37 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
-import { reactive } from 'vue';
+import { reactive, ref } from 'vue';
+import Alert from './UI/Alert.vue';
+import axios from '@/services/axios';
 
-const emit = defineEmits(["save-user"])
+const error = ref("")
 
 const user = reactive({
     id: Date.now(),
     name: "",
     mail: "",
     phone: "",
-    password: "",
-    passwordRepeat: ""
+    password: ""
 })
 
 const saveUserData = () => {
-    emit("save-user", { ...user })
+    if (Object.values(user).includes("")) {
+        error.value = "Los campos no pueden ir vacíos"
+
+        setTimeout(() => {
+            error.value = ""
+        }, 3000)
+        return
+    }
+    axios.addUser(user)
+        .then(({ data }) => console.log(data))
+        .catch(err => console.log(err))
 }
 
 </script>
 
 <template>
+    <Alert v-if="error">{{ error }}</Alert>
     <form @submit.prevent="saveUserData" class="form-login">
         <legend class="title-login">Crea tu cuenta llenando el formulario</legend>
 
@@ -45,11 +57,6 @@ const saveUserData = () => {
                 <label for="password">Password:</label>
                 <input v-model="user.password" id="password" type="password" placeholder="Tu password">
             </div>
-        </div>
-
-        <div class="content-inputs">
-            <label for="password-2">Repetir password:</label>
-            <input v-model="user.passwordRepeat" id="password-2" type="password" placeholder="Repetir password">
         </div>
 
         <div class="content-inputs">
