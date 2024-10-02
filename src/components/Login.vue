@@ -1,6 +1,53 @@
 <!-- eslint-disable vue/multi-word-component-names -->
+<script setup>
+import { reactive, ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+import Alert from './UI/Alert.vue';
+import axios from '@/services/axios';
+
+const error = ref("")
+const users = ref([])
+const userData = ref({})
+
+const router = useRouter()
+
+const loggedUser = reactive({
+    mail: "",
+    password: ""
+})
+
+onMounted(() => {
+    axios.getUsers()
+        .then(({ data }) => users.value = data)
+        .catch(error => console.log(error))
+})
+
+const loginUser = async () => {
+    if (Object.values(loggedUser).includes("")) {
+        error.value = "Los campos no pueden ir vacíos"
+
+        setTimeout(() => {
+            error.value = ""
+        }, 3000)
+        return
+    }
+
+    users.value.filter(user => {
+        if (user.mail === loggedUser.mail && user.password === loggedUser.password) {
+            userData.value = user
+            router.push("/welcome")
+            return user
+        } else {
+            error.value = "El usuario no existe"
+        }
+    })
+}
+
+</script>
+
 <template>
-    <form class="form-login">
+    <Alert v-if="error">{{ error }}</Alert>
+    <form @submit.prevent="loginUser" class="form-login">
         <div class="login-content">
             <legend class="title-login">Inicia sesión</legend>
             <p class="subtitle-login">Para crear un pedido debes iniciar sesión</p>
@@ -8,12 +55,12 @@
 
         <div class="content-inputs">
             <label for="email">Email:</label>
-            <input id="email" type="email" placeholder="Tu email">
+            <input v-model="loggedUser.mail" id="email" type="email" placeholder="Tu email">
         </div>
 
         <div class="content-inputs">
             <label for="password">Password:</label>
-            <input id="password" type="password" placeholder="Tu password">
+            <input v-model="loggedUser.password" id="password" type="password" placeholder="Tu password">
         </div>
 
         <div class="content-inputs">
@@ -22,10 +69,6 @@
 
     </form>
 </template>
-
-<script setup>
-
-</script>
 
 <style scoped>
 .login-content {
